@@ -1,0 +1,31 @@
+{
+  "name": "u-wave-source-dailymotion",
+  "version": "0.0.0",
+  "description": "Dailymotion media source for üWave.",
+  "license": "MIT",
+  "repository": "u-wave/u-wave-source-dailymotion",
+  "author": "Renée Kooi <renee@kooi.me>",
+  "keywords": [
+    "u-wave-source",
+    "dailymotion"
+  ],
+  "engines": {
+    "node": ">= 4"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "babel-cli": "^6.7.7",
+    "babel-eslint": "^6.0.3",
+    "babel-preset-es2015-node4": "^2.1.0",
+    "babel-preset-stage-2": "^6.5.0",
+    "eslint": "^2.13.1",
+    "eslint-config-airbnb-base": "^3.0.0",
+    "eslint-plugin-import": "^1.10.0"
+  },
+  "scripts": {
+    "prepublish": "npm run build",
+    "test": "eslint src",
+    "build": "babel --out-file index.js src/index.js"
+  }
+}
