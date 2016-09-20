@@ -16,7 +16,7 @@ function normalizeMedia(media) {
   };
 }
 
-export function getVideoId(url) {
+export function getVideoID(url) {
   const match = /\/video\/([kx][a-zA-Z0-9]+)($|_)/.exec(url);
   if (match) {
     return match[1];
@@ -56,6 +56,19 @@ export default function dailymotionSource(uw, userOptions = {}) {
   }
 
   async function get(sourceIDs) {
+    // Private videos don't show up in the /videos endpoint. They will normally
+    // only be added one at a time, though, because the search can only find one
+    // at a time. The /video/{id} endpoint _does_ return private videos, so
+    // we'll use that instead when we're requesting just one video. This should
+    // work most of the time, at least.
+    // A more robust way would be to attempt to hit the /video/{id} endpoints
+    // for any videos that were not returned from the /videos request below 👇,
+    // but I'm not sure that it's necessary. We can change it if it turns out to
+    // be a problem.
+    if (sourceIDs.length === 1) {
+      return [await getOne(sourceIDs[0])];
+    }
+
     const { body } = await got(`${opts.api}videos`, {
       json: true,
       query: {
@@ -74,10 +87,11 @@ export default function dailymotionSource(uw, userOptions = {}) {
   }
 
   async function search(query, page = {}) {
-    const id = getVideoId(query);
+    const id = getVideoID(query);
     if (id) {
       return [await getOne(id)];
     }
+
     const { body } = await got(`${opts.api}videos`, {
       json: true,
       query: {
