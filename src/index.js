@@ -16,6 +16,14 @@ function normalizeMedia(media) {
   };
 }
 
+export function getVideoId(url) {
+  const match = /\/video\/([kx][a-zA-Z0-9]+)($|_)/.exec(url);
+  if (match) {
+    return match[1];
+  }
+  return null;
+}
+
 const defaultOptions = {
   api: 'https://api.dailymotion.com/',
   fields: [
@@ -36,6 +44,17 @@ export default function dailymotionSource(uw, userOptions = {}) {
     ...userOptions
   };
 
+  async function getOne(sourceID) {
+    const { body } = await got(`${opts.api}video/${sourceID}`, {
+      json: true,
+      query: {
+        fields: opts.fields.join(',')
+      }
+    });
+
+    return normalizeMedia(body);
+  }
+
   async function get(sourceIDs) {
     const { body } = await got(`${opts.api}videos`, {
       json: true,
@@ -55,6 +74,10 @@ export default function dailymotionSource(uw, userOptions = {}) {
   }
 
   async function search(query, page = {}) {
+    const id = getVideoId(query);
+    if (id) {
+      return [await getOne(id)];
+    }
     const { body } = await got(`${opts.api}videos`, {
       json: true,
       query: {
