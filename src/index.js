@@ -52,7 +52,12 @@ export default function dailymotionSource(uw, userOptions = {}) {
       }
     });
 
-    return normalizeMedia(body);
+    // Private videos return their x-ID ("x8yd34t"), but can only be accessed
+    // using their k-ID ("k7dtszqBcKiDg952dNz"). We'll override the returned
+    // x-ID with the original sourceID, so k-IDs will stay k-IDs.
+    return Object.assign(normalizeMedia(body), {
+      sourceID
+    });
   }
 
   async function get(sourceIDs) {
