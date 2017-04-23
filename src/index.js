@@ -1,15 +1,15 @@
 import got from 'got';
-import getArtistTitle, { fallBackToArtist } from 'get-artist-title';
+import getArtistTitle from 'get-artist-title';
 
 function normalizeMedia(media) {
-  const [artist, title] = getArtistTitle(media.title, [
-    'base',
-    fallBackToArtist(media.soundtrack_artist || media['owner.username'])
-  ]);
+  const [artist, title] = getArtistTitle(media.title, {
+    defaultArtist: media.soundtrack_artist || media['owner.username']
+  });
 
   return {
     sourceID: media.id,
-    artist, title,
+    artist,
+    title,
     duration: media.duration,
     thumbnail: media.thumbnail_360_url,
     restricted: []
@@ -84,14 +84,14 @@ export default function dailymotionSource(uw, userOptions = {}) {
     });
 
     const videos = {};
-    for (const video of body.list) {
+    body.list.forEach((video) => {
       videos[video.id] = normalizeMedia(video);
-    }
+    });
 
     return sourceIDs.map(id => videos[id]);
   }
 
-  async function search(query, page = {}) {
+  async function search(query) {
     const id = getVideoID(query);
     if (id) {
       return [await getOne(id)];
