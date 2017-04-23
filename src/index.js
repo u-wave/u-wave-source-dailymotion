@@ -9,7 +9,8 @@ function normalizeMedia(media) {
 
   return {
     sourceID: media.id,
-    artist, title,
+    artist,
+    title,
     duration: media.duration,
     thumbnail: media.thumbnail_360_url,
     restricted: []
@@ -84,14 +85,14 @@ export default function dailymotionSource(uw, userOptions = {}) {
     });
 
     const videos = {};
-    for (const video of body.list) {
+    body.list.forEach((video) => {
       videos[video.id] = normalizeMedia(video);
-    }
+    });
 
     return sourceIDs.map(id => videos[id]);
   }
 
-  async function search(query, page = {}) {
+  async function search(query) {
     const id = getVideoID(query);
     if (id) {
       return [await getOne(id)];
