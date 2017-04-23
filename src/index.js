@@ -1,11 +1,10 @@
 import got from 'got';
-import getArtistTitle, { fallBackToArtist } from 'get-artist-title';
+import getArtistTitle from 'get-artist-title';
 
 function normalizeMedia(media) {
-  const [artist, title] = getArtistTitle(media.title, [
-    'base',
-    fallBackToArtist(media.soundtrack_artist || media['owner.username'])
-  ]);
+  const [artist, title] = getArtistTitle(media.title, {
+    defaultArtist: media.soundtrack_artist || media['owner.username']
+  });
 
   return {
     sourceID: media.id,

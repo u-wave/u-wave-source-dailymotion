@@ -13,8 +13,8 @@
     "node": ">= 4"
   },
   "dependencies": {
-    "get-artist-title": "^0.3.0",
-    "got": "^6.3.0"
+    "get-artist-title": "^1.0.0",
+    "got": "^6.7.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
