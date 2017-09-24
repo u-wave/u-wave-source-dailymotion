@@ -3,7 +3,7 @@ import getArtistTitle from 'get-artist-title';
 
 function normalizeMedia(media) {
   const [artist, title] = getArtistTitle(media.title, {
-    defaultArtist: media.soundtrack_artist || media['owner.username']
+    defaultArtist: media.soundtrack_artist || media['owner.username'],
   });
 
   return {
@@ -12,7 +12,7 @@ function normalizeMedia(media) {
     title,
     duration: media.duration,
     thumbnail: media.thumbnail_360_url,
-    restricted: []
+    restricted: [],
   };
 }
 
@@ -34,29 +34,29 @@ const defaultOptions = {
     'duration',
     'explicit',
     'soundtrack_artist',
-    'thumbnail_360_url'
-  ]
+    'thumbnail_360_url',
+  ],
 };
 
 export default function dailymotionSource(uw, userOptions = {}) {
   const opts = {
     ...defaultOptions,
-    ...userOptions
+    ...userOptions,
   };
 
   async function getOne(sourceID) {
     const { body } = await got(`${opts.api}video/${sourceID}`, {
       json: true,
       query: {
-        fields: opts.fields.join(',')
-      }
+        fields: opts.fields.join(','),
+      },
     });
 
     // Private videos return their x-ID ("x8yd34t"), but can only be accessed
     // using their k-ID ("k7dtszqBcKiDg952dNz"). We'll override the returned
     // x-ID with the original sourceID, so k-IDs will stay k-IDs.
     return Object.assign(normalizeMedia(body), {
-      sourceID
+      sourceID,
     });
   }
 
@@ -79,8 +79,8 @@ export default function dailymotionSource(uw, userOptions = {}) {
       query: {
         limit: sourceIDs.length,
         ids: sourceIDs.join(','),
-        fields: opts.fields.join(',')
-      }
+        fields: opts.fields.join(','),
+      },
     });
 
     const videos = {};
@@ -102,14 +102,14 @@ export default function dailymotionSource(uw, userOptions = {}) {
       query: {
         search: query,
         limit: 50,
-        fields: opts.fields.join(',')
-      }
+        fields: opts.fields.join(','),
+      },
     });
     return body.list.map(normalizeMedia);
   }
 
   return {
     get: get, // eslint-disable-line object-shorthand
-    search
+    search,
   };
 }
