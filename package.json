@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "get-artist-title": "^1.0.0",
-    "got": "^7.1.0"
+    "got": "^8.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
