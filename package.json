@@ -9,24 +9,31 @@
     "u-wave-source",
     "dailymotion"
   ],
+  "main": "dist/u-wave-source-dailymotion.cjs.js",
+  "module": "dist/u-wave-source-dailymotion.es.js",
   "engines": {
-    "node": ">= 4"
+    "node": ">= 8.9"
   },
   "dependencies": {
+    "babel-core": "^6.26.0",
     "get-artist-title": "^1.0.0",
     "got": "^8.0.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-es2015-node4": "^2.1.1",
-    "babel-preset-stage-2": "^6.24.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-register": "^6.26.0",
     "eslint": "^4.6.0",
     "eslint-config-airbnb-base": "^12.0.0",
-    "eslint-plugin-import": "^2.7.0"
+    "eslint-plugin-import": "^2.7.0",
+    "is-builtin-module": "^2.0.0",
+    "rollup": "^0.55.5",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-node-resolve": "^3.0.2"
   },
   "scripts": {
     "prepublish": "npm run build",
     "test": "eslint src",
-    "build": "babel --out-file index.js src/index.js"
+    "build": "rollup -c"
   }
 }
