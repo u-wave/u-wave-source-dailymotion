@@ -1,6 +1,8 @@
 üWave Dailymotion Media Source
 ==============================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/u-wave/u-wave-source-dailymotion.svg)](https://greenkeeper.io/)
+
 A üWave media source for searching through videos from [Dailymotion].
 
 ## Installation
