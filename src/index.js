@@ -39,10 +39,7 @@ const defaultOptions = {
 };
 
 export default function dailymotionSource(uw, userOptions = {}) {
-  const opts = {
-    ...defaultOptions,
-    ...userOptions,
-  };
+  const opts = Object.assign({}, defaultOptions, userOptions);
 
   async function getOne(sourceID) {
     const { body } = await got(`${opts.api}video/${sourceID}`, {
