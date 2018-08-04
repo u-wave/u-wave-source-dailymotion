@@ -17,7 +17,7 @@
   "dependencies": {
     "babel-core": "^6.26.0",
     "get-artist-title": "^1.0.0",
-    "got": "^8.0.0"
+    "got": "^9.0.0"
   },
   "devDependencies": {
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
