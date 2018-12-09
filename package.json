@@ -24,7 +24,7 @@
     "eslint-plugin-import": "^2.13.0",
     "is-builtin-module": "^3.0.0",
     "rollup": "^0.67.0",
-    "rollup-plugin-node-resolve": "^3.3.0"
+    "rollup-plugin-node-resolve": "^4.0.0"
   },
   "scripts": {
     "prepublish": "npm run build",
