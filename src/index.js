@@ -1,4 +1,4 @@
-import got from 'got';
+import fetch from 'node-fetch';
 import getArtistTitle from 'get-artist-title';
 
 function normalizeMedia(media) {
@@ -42,12 +42,11 @@ export default function dailymotionSource(uw, userOptions = {}) {
   const opts = Object.assign({}, defaultOptions, userOptions);
 
   async function getOne(sourceID) {
-    const { body } = await got(`${opts.api}video/${sourceID}`, {
-      json: true,
-      query: {
-        fields: opts.fields.join(','),
-      },
+    const qs = new URLSearchParams({
+      fields: opts.fields.join(','),
     });
+    const res = await fetch(`${opts.api}video/${sourceID}?${qs}`);
+    const body = await res.json();
 
     // Private videos return their x-ID ("x8yd34t"), but can only be accessed
     // using their k-ID ("k7dtszqBcKiDg952dNz"). We'll override the returned
@@ -71,14 +70,13 @@ export default function dailymotionSource(uw, userOptions = {}) {
       return [await getOne(sourceIDs[0])];
     }
 
-    const { body } = await got(`${opts.api}videos`, {
-      json: true,
-      query: {
-        limit: sourceIDs.length,
-        ids: sourceIDs.join(','),
-        fields: opts.fields.join(','),
-      },
+    const qs = new URLSearchParams({
+      limit: sourceIDs.length,
+      ids: sourceIDs.join(','),
+      fields: opts.fields.join(','),
     });
+    const res = await fetch(`${opts.api}videos?${qs}`);
+    const body = await res.json();
 
     const videos = {};
     body.list.forEach((video) => {
@@ -94,14 +92,13 @@ export default function dailymotionSource(uw, userOptions = {}) {
       return [await getOne(id)];
     }
 
-    const { body } = await got(`${opts.api}videos`, {
-      json: true,
-      query: {
-        search: query,
-        limit: 50,
-        fields: opts.fields.join(','),
-      },
+    const qs = new URLSearchParams({
+      search: query,
+      limit: 50,
+      fields: opts.fields.join(','),
     });
+    const res = await fetch(`${opts.api}videos?${qs}`);
+    const body = await res.json();
     return body.list.map(normalizeMedia);
   }
 
