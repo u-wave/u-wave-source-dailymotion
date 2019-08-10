@@ -17,7 +17,7 @@ export default {
     format: 'es',
     sourcemap: true,
   }],
-  external: id => isBuiltinModule(id) || external.some(m => id.split('/')[0] === m),
+  external: (id) => isBuiltinModule(id) || external.some((m) => id.split('/')[0] === m),
   plugins: [
     nodeResolve(),
   ],

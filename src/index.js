@@ -39,7 +39,7 @@ const defaultOptions = {
 };
 
 export default function dailymotionSource(uw, userOptions = {}) {
-  const opts = Object.assign({}, defaultOptions, userOptions);
+  const opts = { ...defaultOptions, ...userOptions };
 
   async function getOne(sourceID) {
     const qs = new URLSearchParams({
@@ -83,7 +83,7 @@ export default function dailymotionSource(uw, userOptions = {}) {
       videos[video.id] = normalizeMedia(video);
     });
 
-    return sourceIDs.map(id => videos[id]);
+    return sourceIDs.map((id) => videos[id]);
   }
 
   async function search(query) {
