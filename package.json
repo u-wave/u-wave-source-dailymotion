@@ -19,12 +19,12 @@
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
-    "eslint": "^6.0.0",
+    "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
     "is-builtin-module": "^3.0.0",
-    "rollup": "^1.15.2",
-    "rollup-plugin-node-resolve": "^5.0.2"
+    "rollup": "^1.19.4",
+    "rollup-plugin-node-resolve": "^5.2.0"
   },
   "scripts": {
     "prepublish": "npm run build",
