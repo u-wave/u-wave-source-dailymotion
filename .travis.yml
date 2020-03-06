@@ -5,4 +5,4 @@ script:
   - npm test
 node_js:
   - stable
-  - 8.9
+  - 10

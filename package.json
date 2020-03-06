@@ -12,7 +12,7 @@
   "main": "dist/u-wave-source-dailymotion.cjs.js",
   "module": "dist/u-wave-source-dailymotion.es.js",
   "engines": {
-    "node": ">= 8.9"
+    "node": ">= 10"
   },
   "dependencies": {
     "get-artist-title": "^1.1.1",
