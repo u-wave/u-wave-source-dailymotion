@@ -27,7 +27,7 @@
     "rollup": "^2.0.0"
   },
   "scripts": {
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
     "test": "eslint src",
     "build": "rollup -c"
   }
