@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "get-artist-title": "^1.1.1",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^3.2.8"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.0.2",
