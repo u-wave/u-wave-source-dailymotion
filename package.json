@@ -24,7 +24,7 @@
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.18.2",
     "is-builtin-module": "^3.0.0",
-    "rollup": "^2.0.0"
+    "rollup": "^3.17.3"
   },
   "scripts": {
     "prepare": "npm run build",
